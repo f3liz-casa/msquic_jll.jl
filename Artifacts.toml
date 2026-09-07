@@ -1,0 +1,128 @@
+[[msquic]]
+arch = "aarch64"
+git-tree-sha1 = "8469169250996537bee5230be84aef74382d2cf3"
+os = "macos"
+
+    [[msquic.download]]
+    sha256 = "d111895397a534951a8d5c221b040b57a0c5e4321b6c196eaab0405c60980db8"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.aarch64-apple-darwin.tar.gz"
+[[msquic]]
+arch = "aarch64"
+git-tree-sha1 = "44b3847a78fd0e2ad815eaeafc0ec8fd48b473dc"
+libc = "glibc"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "9849298b0e2f9434e9105bf8a6764dd1ce3bfc985bb59b23dbc8c2e1dad6ec87"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.aarch64-linux-gnu.tar.gz"
+[[msquic]]
+arch = "aarch64"
+git-tree-sha1 = "f02e2d6dde37c9bc182d30a3a929084929cb29f8"
+libc = "musl"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "a19c82c6907fc4d2bb3103c10797b8d9967abb88ca991465539f30a716df3129"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.aarch64-linux-musl.tar.gz"
+[[msquic]]
+arch = "armv6l"
+call_abi = "eabihf"
+git-tree-sha1 = "6d8136d0e497830110d91b21ada2f25653fda4e2"
+libc = "glibc"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "4d3bd4816a60d857d864e4c6a0481bda767649b4d45d631c72644cf626e3a6e5"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.armv6l-linux-gnueabihf.tar.gz"
+[[msquic]]
+arch = "armv6l"
+call_abi = "eabihf"
+git-tree-sha1 = "f0b48270756d5053914946d0fc491c927aaf4e25"
+libc = "musl"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "00065a937130967cd1b919f09e3e4892bb05e1db3345ae47d43e2c0e226dcc3b"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.armv6l-linux-musleabihf.tar.gz"
+[[msquic]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "da33a895e426778f79d508ecdad7f822beca43b5"
+libc = "glibc"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "b473d519a1ad478b08679502734d58ece0816bad55c0255dc2d8e24bdf2247a9"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.armv7l-linux-gnueabihf.tar.gz"
+[[msquic]]
+arch = "armv7l"
+call_abi = "eabihf"
+git-tree-sha1 = "05fe14509503e433463e5959dec92bb95a14505d"
+libc = "musl"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "36035c06890ebe89c85291aab52b03501c61943733e3ecdedf567989abb4683e"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.armv7l-linux-musleabihf.tar.gz"
+[[msquic]]
+arch = "i686"
+git-tree-sha1 = "a44afc3f4f8cd359e04a121b4e9f4c7ea42a8d3a"
+libc = "glibc"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "4b2bcc2726abec50f5f742ec82d56c5cc1c6115e0683f7363746e5d19fab7f06"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.i686-linux-gnu.tar.gz"
+[[msquic]]
+arch = "i686"
+git-tree-sha1 = "116e285105bc22d08d8350943767524c4c08e305"
+libc = "musl"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "7cff7ea262690e97cb50108ab23227880445f86dc7d207900db1c618f2a09c23"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.i686-linux-musl.tar.gz"
+[[msquic]]
+arch = "powerpc64le"
+git-tree-sha1 = "c27748df684f41206632db56cd3a8bdc0d15d418"
+libc = "glibc"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "fc60a5b40f3491faea9947df2d451ebec17332b645641e4cbd82ba3f4557e9c4"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.powerpc64le-linux-gnu.tar.gz"
+[[msquic]]
+arch = "riscv64"
+git-tree-sha1 = "b987be9c7606a9eb6d3a6dc54b776a7b90105ced"
+libc = "glibc"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "fb6c7ffad3348fdfa07a0427d0fe7441d9ce2bca47a4a8449ab7b3255ee91359"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.riscv64-linux-gnu.tar.gz"
+[[msquic]]
+arch = "x86_64"
+git-tree-sha1 = "0f3057c24ce3de3b02ec4c48961fceb37001a00b"
+os = "macos"
+
+    [[msquic.download]]
+    sha256 = "d1e3158c2ef21cadf1ad6bfec7bdab0322c16bdc79280aa9c56578e4d2d02361"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.x86_64-apple-darwin.tar.gz"
+[[msquic]]
+arch = "x86_64"
+git-tree-sha1 = "c660f0f89e12c4e60bbbd9015559112dd5583c5b"
+libc = "glibc"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "4c89b3be14f0e86a7a6b6bdf7f5b3a830d93ebca0884ee5711dfdf1cf088a9e8"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.x86_64-linux-gnu.tar.gz"
+[[msquic]]
+arch = "x86_64"
+git-tree-sha1 = "b0c151c4d939e2a268e192b972dcf8ae033a22a1"
+libc = "musl"
+os = "linux"
+
+    [[msquic.download]]
+    sha256 = "b28c04ab4c2ee06bb120d89f53937db64f5565afb38c149716b71f4043194e7c"
+    url = "https://github.com/f3liz-casa/msquic_jll.jl/releases/download/msquic-v2.5.7+0/msquic.v2.5.7.x86_64-linux-musl.tar.gz"
