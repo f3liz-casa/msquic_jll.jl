@@ -6,14 +6,58 @@
 name: msquic_jll
 
 on:
-  push:
-    branches: [main]
-    paths: [build_tarballs.jl, .github/workflows/build.yml]
   pull_request:
     paths: [build_tarballs.jl, .github/workflows/build.yml]
   workflow_dispatch:
     inputs:
       deploy:
+        description: "Publish this repo as msquic_jll after building every platform"
+        type: boolean
+        default: false
+
+env:
+  BINARYBUILDER_AUTOMATIC_APPLE: "true"
+  BINARYBUILDER_USE_CCACHE: "true"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - x86_64-linux-gnu
+          - i686-linux-gnu
+          - aarch64-linux-gnu
+          - armv6l-linux-gnueabihf
+          - armv7l-linux-gnueabihf
+          - powerpc64le-linux-gnu
+          - riscv64-linux-gnu
+          - x86_64-linux-musl
+          - i686-linux-musl
+          - aarch64-linux-musl
+          - armv6l-linux-musleabihf
+          - armv7l-linux-musleabihf
+          - x86_64-apple-darwin
+          - aarch64-apple-darwin
+    steps:
+      - uses: actions/checkout@v7
+      - uses: julia-actions/setup-julia@v3
+        with:
+          version: "1"
+      - uses: julia-actions/cache@v3
+      - name: Install BinaryBuilder
+        run: julia -e 'using Pkg; Pkg.add("BinaryBuilder")'
+      - name: Build ${{ matrix.platform }}
+        run: julia build_tarballs.jl --verbose ${{ matrix.platform }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: msquic-${{ matrix.platform }}
+          path: products/msquic.*.tar.gz
+          if-no-files-found: error
+
+  deploy:
     if: ${{ inputs.deploy }}
     needs: build
     runs-on: ubuntu-latest
@@ -38,4 +82,7 @@ on:
       - name: Publish (wrapper to main, tarballs to a Release)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: julia build_tarballs.jl --verbose --skip-build --deploy=f3liz-casa/msquic_jll.jl
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          julia build_tarballs.jl --verbose --skip-build --deploy=f3liz-casa/msquic_jll.jl
