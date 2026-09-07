@@ -1,7 +1,8 @@
-# msquic, built with BinaryBuilder on GitHub's Linux runners. The build job checks every
-# platform on push and PR. The deploy job, started by hand, builds every platform in one go
-# and publishes this repo as a JLL package: the wrapper code on main, the tarballs on a
-# Release. It runs here, in the JLL's own repo, so the default GITHUB_TOKEN is enough.
+# msquic, built with BinaryBuilder on GitHub's Linux runners, one platform per job, in
+# parallel. The deploy job, started by hand, waits for all of them, collects the tarballs
+# and publishes this repo as a JLL package with --skip-build: the wrapper code on main, the
+# tarballs on a Release. It runs here, in the JLL's own repo, so the default GITHUB_TOKEN is
+# enough.
 name: msquic_jll
 
 on:
@@ -13,57 +14,10 @@ on:
   workflow_dispatch:
     inputs:
       deploy:
-        description: "Build every platform and publish this repo as msquic_jll"
-        type: boolean
-        default: false
-
-env:
-  BINARYBUILDER_AUTOMATIC_APPLE: "true"
-  BINARYBUILDER_USE_CCACHE: "true"
-
-jobs:
-  build:
-    if: ${{ !inputs.deploy }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 90
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - x86_64-linux-gnu
-          - i686-linux-gnu
-          - aarch64-linux-gnu
-          - armv6l-linux-gnueabihf
-          - armv7l-linux-gnueabihf
-          - powerpc64le-linux-gnu
-          - riscv64-linux-gnu
-          - x86_64-linux-musl
-          - i686-linux-musl
-          - aarch64-linux-musl
-          - armv6l-linux-musleabihf
-          - armv7l-linux-musleabihf
-          - x86_64-apple-darwin
-          - aarch64-apple-darwin
-    steps:
-      - uses: actions/checkout@v7
-      - uses: julia-actions/setup-julia@v3
-        with:
-          version: "1"
-      - uses: julia-actions/cache@v3
-      - name: Install BinaryBuilder
-        run: julia -e 'using Pkg; Pkg.add("BinaryBuilder")'
-      - name: Build ${{ matrix.platform }}
-        run: julia build_tarballs.jl --verbose ${{ matrix.platform }}
-      - uses: actions/upload-artifact@v7
-        with:
-          name: msquic-${{ matrix.platform }}
-          path: products/*.tar.gz
-          if-no-files-found: error
-
-  deploy:
     if: ${{ inputs.deploy }}
+    needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 60
     permissions:
       contents: write
     steps:
@@ -74,7 +28,14 @@ jobs:
       - uses: julia-actions/cache@v3
       - name: Install BinaryBuilder
         run: julia -e 'using Pkg; Pkg.add("BinaryBuilder")'
-      - name: Build every platform and publish
+      - name: Collect the tarballs from every platform
+        uses: actions/download-artifact@v7
+        with:
+          pattern: msquic-*
+          path: products
+          merge-multiple: true
+      - run: ls -la products
+      - name: Publish (wrapper to main, tarballs to a Release)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: julia build_tarballs.jl --verbose --deploy=f3liz-casa/msquic_jll.jl
+        run: julia build_tarballs.jl --verbose --skip-build --deploy=f3liz-casa/msquic_jll.jl
